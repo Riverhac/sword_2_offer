@@ -7,8 +7,8 @@ public class binarytree {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] A=new int[]{1,2,4,7,3,5,6,8};
-		int[] B=new int[]{4,7,2,1,5,3,8,6};
+		int[] A=new int[]{2,1,4,3};
+		int[] B=new int[]{4,1,2,3};
 		
 		int rootval = rebuildtree(A,B);
 		System.out.println(rootval);
@@ -26,7 +26,7 @@ public class binarytree {
 	}
 	public static BinaryTreeNode solve(int[] A,int[] B,int s1,int e1,int s2,int e2 )
 	{
-		
+		System.out.println(s1+" "+e1+" "+s2+" "+e2 );
 		if(s1==e1) return new BinaryTreeNode(A[s1]);
 		int numberofleft = 0;
 		int numberofright = 0;
