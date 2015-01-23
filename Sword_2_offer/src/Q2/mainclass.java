@@ -9,7 +9,8 @@ public class mainclass {
 		// TODO Auto-generated method stub
 		//SingletonClass sc1 = new SingletonClass(); //这样是不行的
 		SingletonClass sc2 = SingletonClass.getSC();
-		SingletonClass2 sc3 = SingletonClass2.getSC();
+		SingletonClass2 sc3 = SingletonClass2.getSC(); 
+		
 	}
 
 }
