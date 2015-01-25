@@ -21,7 +21,8 @@ public class mirrow {
 		if(root.left!=null)
 			getmirrow(root.left);
 		if(root.right!=null)
-			getmirrow(root.right);
+			getmirrow(root.right);   
+		
 		
 	}
 }
