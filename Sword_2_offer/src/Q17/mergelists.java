@@ -7,27 +7,65 @@ public class mergelists {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ListNode[] lists1 = new ListNode[50];
-		for(int i=0;i<50;i++)
+		
+		
+		int N1=1000000;
+		int N2=1000000;
+		//我的方法（迭代）
+		ListNode[] lists1 = new ListNode[N1];
+		for(int i=0;i<N1;i++)
 		{
 			lists1[i]=new ListNode(2*i);
 		}
-		for(int i=0;i<50-1;i++)
+		for(int i=0;i<N1-1;i++)
 		{
 			lists1[i].next = lists1[i+1];
 		}
 		
-		ListNode[] lists2 = new ListNode[80];
-		for(int i=0;i<80;i++)
+		ListNode[] lists2 = new ListNode[N2];
+		for(int i=0;i<N2;i++)
 		{
 			lists2[i]=new ListNode(3*i);
 		}
-		for(int i=0;i<80-1;i++)
+		for(int i=0;i<N2-1;i++)
 		{
 			lists2[i].next = lists2[i+1];
 		}
-		ListNode head = merge(lists1[0],lists2[0]);
-		printlist(head);
+		long time1 = System.currentTimeMillis();
+		ListNode head1 = merge(lists1[0],lists2[0]);
+		long time2 = System.currentTimeMillis();
+		//printlist(head1);
+		System.out.print("花费时间:");
+		System.out.println(time2-time1);
+		
+		//书上方法（递归）
+		ListNode[] lists3 = new ListNode[N1];
+		for(int i=0;i<N1;i++)
+		{
+			lists3[i]=new ListNode(2*i);
+		}
+		for(int i=0;i<N1-1;i++)
+		{
+			lists3[i].next = lists3[i+1];
+		}
+		
+		ListNode[] lists4 = new ListNode[N2];
+		for(int i=0;i<N2;i++)
+		{
+			lists4[i]=new ListNode(3*i);
+		}
+		for(int i=0;i<N2-1;i++)
+		{
+			lists4[i].next = lists4[i+1];
+		}
+		long time3 = System.currentTimeMillis();
+		ListNode head2 = merge(lists3[0],lists4[0]);
+		long time4 = System.currentTimeMillis();
+		//printlist(head2);
+		System.out.print("花费时间:");
+		System.out.println(time4-time3);
+		
+		//花费时间分别为16和0，可见递归时间要好些，但是空间使用非常多
 	}
 	
 	public static void printlist(ListNode head)
@@ -92,6 +130,24 @@ public class mergelists {
 		
 	}
 
+	
+	public static ListNode merge1(ListNode list1,ListNode list2)
+	{
+		if(list1==null) return list2;
+		if(list2==null) return list1;
+		ListNode mergehead = null;
+		if(list1.val < list2.val)
+		{	
+			mergehead = list1;
+			mergehead.next = merge1(list1.next,list2);
+		}
+		else
+		{
+			mergehead = list2;
+			mergehead.next = merge1(list1,list2.next);
+		}
+		return mergehead;
+	}
 }
 class ListNode {
     int val;
