@@ -83,13 +83,9 @@ public class mink {
 			heap[i] = A[i];
 		}
 		//调整初始化堆
-		boolean flag = false;
-		//如果有调整，重新来
-		for(int i=0;i<k;i++)
+		for(int i=k/2;i>=0;i--)//从k/2到0置换
 		{
-			flag = adjustheap(heap,i);
-			if(flag == true)
-				i=-1;
+			adjustheap(heap,i);
 		}
 		
 		//进行数据流
@@ -98,11 +94,9 @@ public class mink {
 			if(A[i] >= heap[0]) continue;
 			else
 			{	
-				for(int j=0;j<k;j++)
-				{
-					//调整堆
-					adjustheap(heap,j);
-				}
+				heap[0] = A[i];//把堆顶换掉
+				//调整堆
+				adjustheap(heap,0);
 			}
 		}
 		for(int i=0;i<k;i++)
@@ -112,11 +106,11 @@ public class mink {
 		
 	}
 	
-	public static boolean adjustheap(int[] heap,int i)//堆的调整
+	public static void adjustheap(int[] heap,int i)//堆的调整
 	{		
 		int length = heap.length;
 		//如果没有右孩子和左孩子
-		if(length-1 < 2*i ) return false;
+		if(length-1 < 2*i ) return;
 		//只有左孩子
 		if(length-1 == 2*i) 
 		{
@@ -127,18 +121,18 @@ public class mink {
 				heap[2*i] = temp;
 				adjustheap(heap,2*i);
 			}
-			else return true;
+			else return;
 		}
 		else
 			//左右孩子都有
 		{
-			if(heap[i] >= heap[2*i] && heap[i]>=heap[2*i+1]) return false;
+			if(heap[i] >= heap[2*i] && heap[i]>=heap[2*i+1]) return;
 			if(heap[2*i] >=heap[i] && heap[2*i] >= heap[2*i+1])
 			{
 				int temp = heap[i];
 				heap[i] = heap[2*i];
 				heap[2*i] = temp;
-				return true;
+				adjustheap(heap,2*i);
 			}
 			else
 				if(heap[2*i+1] >=heap[i] && heap[2*i+1] >= heap[2*i])
@@ -146,11 +140,10 @@ public class mink {
 					int temp = heap[i];
 					heap[i] = heap[2*i+1];
 					heap[2*i+1] = temp;
-					return true;
+					adjustheap(heap,2*i+1);
 				}
 				
 		}
-		return false;
 		
 			
 	}
